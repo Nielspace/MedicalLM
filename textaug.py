@@ -8,15 +8,7 @@ import nlpaug.augmenter.word as naw
 import nlpaug.augmenter.sentence as nas
 
 
-class text_aug
-def __init__(self, 
-            text, 
-            model="bert-base-uncased", 
-            action="substitute", 
-            n_samples=1, 
-            max_length=130, 
-            min_length=30):
-
+class text_aug:
     
     """ 
     model-name                 | action     | definition
