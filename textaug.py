@@ -33,7 +33,7 @@ class text_aug:
         return augmented_text
         
         
-    def summarize_w_t5_base(self, text)
+    def summarize_w_t5_base(self, text):
         aug = nas.AbstSummAug(model_path='t5-base')
         augmented_text = aug.augment(text)
         return augmented_text

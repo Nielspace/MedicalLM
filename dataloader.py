@@ -168,10 +168,12 @@ def csv_concat(dir):
     
     return csv_files
 
-csv_files = csv_concat(DATA_PATH)
 
 
 def file_structuring(csv_files:list()):
+    """
+    returns pandas dataframe
+    """
     code_file_dict = dict()
     num_file = 0
 
