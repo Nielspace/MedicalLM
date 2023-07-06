@@ -196,3 +196,29 @@ def file_structuring(csv_files:list()):
     
     return df
 
+
+def clean_text(text ): 
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text1 = ''.join([w for w in text if not w.isdigit()]) 
+    REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
+    text2 = text1.lower()
+    text2 = REPLACE_BY_SPACE_RE.sub('', text2) 
+    return text2
+
+def lemmatize_text(text):
+    wordlist=[]
+    lemmatizer = WordNetLemmatizer() 
+    sentences=sent_tokenize(text)
+    
+    intial_sentences= sentences[0:1]
+    final_sentences = sentences[len(sentences)-2: len(sentences)-1]
+    
+    for sentence in intial_sentences:
+        words=word_tokenize(sentence)
+        for word in words:
+            wordlist.append(lemmatizer.lemmatize(word))
+    for sentence in final_sentences:
+        words=word_tokenize(sentence)
+        for word in words:
+            wordlist.append(lemmatizer.lemmatize(word))       
+    return ' '.join(wordlist) 
