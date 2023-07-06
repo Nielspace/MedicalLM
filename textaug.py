@@ -20,25 +20,27 @@ class text_aug:
     facebook/bart-large-cnn    | summary    | Summarize the text with a min and max word length
     
     """
-    def bert_base_uncased(self, text, action, n_samples):
+    @staticmethod
+    def bert_base_uncased(text, action, n_samples):
         aug = naw.ContextualWordEmbsAug(
             model_path='bert-base-uncased', action=action)
         augmented_text = aug.augment(text, n=n_samples)
         return augmented_text
-
-    def distilbert_base_uncased(self, text, action="substitute"):
+    @staticmethod
+    def distilbert_base_uncased(text, action="substitute"):
         aug = naw.ContextualWordEmbsAug(model_path='distilbert-base-uncased', 
                                         action="substitute")
         augmented_text = aug.augment(text)
         return augmented_text
         
-        
-    def summarize_w_t5_base(self, text):
+    @staticmethod  
+    def summarize_w_t5_base(text):
         aug = nas.AbstSummAug(model_path='t5-base')
         augmented_text = aug.augment(text)
-        return augmented_text
-        
-    def summarize_w_fb_bart(self, text, max_length, min_length):
+        return augmented_text[0]
+
+    @staticmethod  
+    def summarize_w_fb_bart(text, max_length, min_length):
         summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
         out = summarizer(text, max_length=max_length, 
                          min_length=min_length, do_sample=False)
