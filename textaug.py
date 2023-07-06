@@ -1,0 +1,62 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.tokenize import sent_tokenize
+from nltk.stem import WordNetLemmatizer
+
+from transformers import pipeline
+import nlpaug.augmenter.word as naw
+import nlpaug.augmenter.sentence as nas
+
+
+class text_aug
+def __init__(self, 
+            text, 
+            model="bert-base-uncased", 
+            action="substitute", 
+            n_samples=1, 
+            max_length=130, 
+            min_length=30):
+
+    
+    """ 
+    model-name                 | action     | definition
+    ---------------------------|------------------------
+    bert-base-uncased          | substitute | Insert word by contextual word embeddings
+    ---------------------------|-------------------------
+    t5-base                    | summary    | Summarize the text
+    ---------------------------|-------------------------
+    facebook/bart-large-cnn    | summary    | Summarize the text with a min and max word length
+    
+    """
+    def bert_base_uncased(self, text, action, n_samples):
+        aug = naw.ContextualWordEmbsAug(
+            model_path='bert-base-uncased', action=action)
+        augmented_text = aug.augment(text, n=n_samples)
+        return augmented_text
+
+    def distilbert_base_uncased(self, text, action="substitute"):
+        aug = naw.ContextualWordEmbsAug(model_path='distilbert-base-uncased', 
+                                        action="substitute")
+        augmented_text = aug.augment(text)
+        return augmented_text
+        
+        
+    def summarize_w_t5_base(self, text)
+        aug = nas.AbstSummAug(model_path='t5-base')
+        augmented_text = aug.augment(text)
+        return augmented_text
+        
+    def summarize_w_fb_bart(self, text, max_length, min_length):
+        summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+        out = summarizer(text, max_length=max_length, 
+                         min_length=min_length, do_sample=False)
+        augmented_text = out["summary_text"]
+
+        return augmented_text
+
+
+
+
+
+
+

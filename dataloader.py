@@ -30,7 +30,7 @@ nltk.download('wordnet')
 
 
 model_name = 'tuner007/pegasus_paraphrase'
-
+DATA_PATH = "data"
 
 doc_structure = {
     'code':[],
@@ -155,3 +155,42 @@ class preprocessing:
       bs+=1
 
     print("Documents prepared and downloaded to the local system")
+
+
+
+def csv_concat(dir):
+    all_files = []
+    for root, dirs, files in os.walk(dir):
+        for name in files:
+            all_files.append(os.path.join(root, name))
+            
+    csv_files = list(filter(lambda f: f.endswith('.csv'), all_files))
+    
+    return csv_files
+
+csv_files = csv_concat(DATA_PATH)
+
+
+def file_structuring(csv_files:list()):
+    code_file_dict = dict()
+    num_file = 0
+
+
+    for i, f in enumerate(csv_files):
+        df = pd.read_csv(f)
+        p1, p2, p3 = (df[['notes', 'code', 'desc']], 
+                      df[['aug_text', 'code', 'desc']], 
+                      df[['paraphrase', 'code', 'desc']])
+
+        p1.columns = ['notes', 'codes', 'desc']
+        p2.columns = ['notes', 'codes', 'desc']
+        p3.columns = ['notes', 'codes', 'desc']
+
+        df = pd.concat([p1, p2, p3], axis=0, ignore_index=True)
+        df = df[['notes', 'codes', 'desc']]
+        code_file_dict[i + 1] = df
+
+    df = pd.concat(code_file_dict.values())
+    
+    return df
+
