@@ -1,0 +1,14 @@
+numpy==1.22.3
+torch
+tqdm==4.64.0
+seaborn==0.11.2
+matplotlib==3.5.1
+python-docx
+sentence-splitter
+SentencePiece
+pyLDAvis
+nlpaug
+
+git+https://github.com/huggingface/transformers.git
+git+https://github.com/huggingface/accelerate.git
+git+https://github.com/UKPLab/sentence-transformers.git
