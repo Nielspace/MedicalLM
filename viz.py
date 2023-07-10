@@ -2,11 +2,13 @@ from embeddings import embeddings
 
 import numpy as np 
 
+import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.pipeline import make_pipeline
 
 class model_viz:
+
     @staticmethod
     def model_comp_viz(df, x_feature, y_feature, model_name:list(), model_architecture:list()):
         isinstance(model_name, list)
@@ -18,7 +20,7 @@ class model_viz:
         i = 1
 
 
-        for ds_cnt, _ in enumerate(sample):
+        for ds_cnt, _ in enumerate(df):
             (X_train, X_test, y_train, y_test, 
             vectorizer,feature_names, pca, labels, category_list) = embeddings.embeddings_gen(df, 
                                                                                             x_feature, 
@@ -28,7 +30,7 @@ class model_viz:
             cm = plt.cm.RdBu
             cm_bright = ListedColormap(["#FF0000", "#0000FF"])
 
-            ax = plt.subplot(4, int((len(classifiers)+1)/4), i)
+            ax = plt.subplot(4, int((len(model_architecture)+1)/4), i)
             if ds_cnt == 0:
                 ax.set_title("Input data")
             ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright, edgecolors="k")
@@ -39,8 +41,8 @@ class model_viz:
             ax.set_yticks(())
             i += 1
 
-            for name, clf in zip(names, classifiers):
-                ax = plt.subplot(4, int((len(classifiers)+1)/4), i)
+            for name, clf in zip(model_name, model_architecture):
+                ax = plt.subplot(4, int((len(model_architecture)+1)/4), i)
 
                 clf = make_pipeline(clf)
                 clf.fit(X_train, y_train)
@@ -79,7 +81,7 @@ class model_viz:
                     horizontalalignment="right",
                 )
 
-                if i == (len(classifiers) + 1):
+                if i == (len(model_architecture) + 1):
                     i = 1
                 else:
                     i += 1
