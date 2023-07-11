@@ -33,6 +33,21 @@ We used word cloud algorithm to generate visual representations of text data, wh
 
 ![Word Cloud](resource/WC.png)
 
+With word cloud we discovered important keywords that could contribute more toward the training and final classification.
+
+### Word Count
+We used word cloud to see words that have high frequency in the data. 
+
+![Word Count](resource/WCnt.png)
+
+Here we discovered series numbers like "1.", "2.", et cetera that was not required at all. These were generated as a response to the prompt. 
+
+###  Latent Dirichlet Allocation 
+LDA was to discover topics that hidden. Latent variables or latent factors are variables that cannot be directly observed or measured but are inferred or estimated based on other observed variables or indicators. LDA which is a probabilistic topic modeling technique is extremely handy to uncover latent topics in a collection of documents.
+
+It generally creates a topic and inform what words or phrases were predominantly used in the topic. 
+
+![Latent Dirichlet Allocation](resource/LDA.png)
 
 ## Model
 
