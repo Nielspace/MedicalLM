@@ -58,12 +58,10 @@ Produce a detailed operative note for a patient who underwent a procedure releva
 
 As mentioned before because of the financial restictions we had to stop data generation. But to increase the density of the data we had to come with text augmentation approches. Couple of them are text summarization and paraphrasing. We used the Huggingface library to achieve text augmentation, although it was a time consuming process. 
 
-| model-name                 | action     | definition                                |
-|---------------------------|---------------------------------------------------------|
-| bert-base-uncased          | substitute | Insert word by contextual word embeddings |
-|---------------------------|---------------------------------------------------------|
-| t5-base                    | summary    | Summarize the text                        |
-|---------------------------|---------------------------------------------------------|
+| model-name                 | action     | definition                                       |
+|----------------------------|------------|--------------------------------------------------|
+| bert-base-uncased          | substitute | Insert word by contextual word embeddings        |
+| t5-base                    | summary    | Summarize the text                               |
 | facebook/bart-large-cnn    | summary    | Summarize the text with a min and max word length|
     
 
