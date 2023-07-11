@@ -14,9 +14,28 @@ The dataset was automatically collected and stored on a .docx file. The file had
 
 Majority of the data is collected using "prompt engineering" which allowed us collect data on a large scale. But due to the rising cost of generated tokens the dataset was not fully collected. 
 
-Although we did collect the M13 series that too partially because of the same reason. 
+For the same reason we partially collected the M13 series. 
+
+### Data engineering and preprocessing
+
+For effective and robust machine learning model we made sure that the dataset doesn't carry unwanted and redundant information. So we took time to maunally access the data as much as possible to find unwanted phrases. Since we generated the data there was a high probability that the phrases might repeat itself. This is one of the major drawback of the LLM. But we also observed there was less to no duplicacy since some of the repeated or similar phrases were hidden in the paragraph pertaining to the operative notes. 
+
+Such phrases don't raise much concerns unless there are the part of the entire paragraph. But other phrases which these LLMs yield as a part of their conversational capabilities could possibly raise concerns. One of such phrases are "Certainly, here are 10 samples...". Apart from that there were other reduntant words which had to be discovered. 
+
+For data exploration we used three major algorithms:
+1. Word Cloud  
+2. Word Count
+3. LDA
+ 
+
+#### Word Cloud
+We used word cloud algorithm to generate visual representations of text data, where the size of each word is proportional to its frequency or importance in the text. The algorithm analyzes the input text, counts the occurrence of each word, and determines how to arrange and size the words in the resulting word cloud.
+
+![Word Cloud](resource/WC.png)
+
 
 ## Model
+
 
 ## Training
 
