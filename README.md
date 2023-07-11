@@ -53,6 +53,8 @@ Develop an operative note for a patient diagnosed with an ICD10 code C61 - "Mali
 10. Prompt:
 Produce a detailed operative note for a patient who underwent a procedure relevant to ICD10 code J45 - "Asthma".
 
+### Text Generation
+Apart from generating data via prompt engineering we also finetuned `"tiiuae/falcon-7b"` on PubMed dataset using QLoRA to generate additional datasets. This was achieved by Huggingface library. 
 
 ### Text augmentation
 
