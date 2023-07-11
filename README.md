@@ -120,8 +120,20 @@ We also tried the same with XGBoost.
 | 4	   | XGB	                   | 0.931106 | 0.931117  | 0.931102 | 0.931105 |
 
 
+![Model Comparison](resource/model_comp.png)
+
 #### Training
 
-With the results above we decided to 
+With the results above we decided to train the model on Random Forest and XGBoost. In addition, we also trained the model on Logistic regression with the full (multilabel) dataset. 
+
+This is the model performance on the entire dataset. 
+| S.no |  Model                | Accuracy | Precision | Recall   | F1-Score |
+|------|-----------------------|----------|-----------|----------|----------|
+| 0	   | XGBoost               | 0.989562 | 0.989626  | 0.989575 | 0.989561 |
+| 1	   | Random Forest	       | 0.899791 | 0.900258  | 0.899756 | 0.899756 |
+| 2	   | Logistic Regression   | 0.885177 | 0.885333  | 0.885199 | 0.885169 |
+
+#### Inference
+
 
 ## Conclusion
