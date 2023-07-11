@@ -17,12 +17,55 @@ Majority of the data is collected using "prompt engineering" which allowed us co
 For the same reason we partially collected the M13 series. 
 
 ### Prompt Engineering
+To generate the data we relied heavily on prompt engineering. A good prompt can generate good synthetic data and can reduce time and effort. We used OpenAI's `model="gpt-3.5-turbo-16k-0613"` and `"gpt-4"` for prompt engineering. 
+
+One of the approaches was to feed a sample of operative notes and ask the model to frame questions or prompts to generate valuable synthetic data. 
+
+For instance we got a variety of responses but we choose the best of 10 and finetuned according to our likings. Here are some of the prompts that were used for generating synthetic data:
+
+1. Prompt: 
+Generate a synthetic operative note for a patient admitted with a diagnosis of ICD10 code K80 - "Cholelithiasis" (gallstones).
+
+2. Prompt: 
+Create an operative note for an individual who has undergone a procedure related to ICD10 code I25 - "Chronic ischemic heart disease".
+
+3. Prompt: 
+Write a surgical note for a patient who has been diagnosed with ICD10 code M16 - "Osteoarthritis of hip".
+
+4. Prompt:
+Generate a synthetic operative note for a procedure conducted on a patient with an ICD10 code M17 - "Osteoarthritis of the knee".
+
+5. Prompt: 
+Formulate an operative report for a patient who has been treated for ICD10 code E10 - "Type 1 diabetes mellitus".
+
+6. Prompt:
+Provide a surgical summary for a patient diagnosed with ICD10 code I10 - "Essential (primary) hypertension".
+
+7. Prompt:
+Write an operative note for a surgery linked with ICD10 code K21 - "Gastro-esophageal reflux disease".
+
+8. Prompt:
+Generate a surgical report for a procedure related to an individual presenting with an ICD10 code E78.5 - "Hyperlipidemia, unspecified".
+
+9. Prompt:
+Develop an operative note for a patient diagnosed with an ICD10 code C61 - "Malignant neoplasm of prostate".
+
+10. Prompt:
+Produce a detailed operative note for a patient who underwent a procedure relevant to ICD10 code J45 - "Asthma".
+
 
 ### Text augmentation
 
-#### Summarization
+As mentioned before because of the financial restictions we had to stop data generation. But to increase the density of the data we had to come with text augmentation approches. Couple of them are text summarization and paraphrasing. We used the Huggingface library to achieve text augmentation, although it was a time consuming process. 
 
-#### Paraphrasing
+|model-name                 | action     | definition
+|---------------------------|------------------------
+|bert-base-uncased          | substitute | Insert word by contextual word embeddings
+|---------------------------|-------------------------
+|t5-base                    | summary    | Summarize the text
+|---------------------------|-------------------------
+|facebook/bart-large-cnn    | summary    | Summarize the text with a min and max word length
+    
 
 ### Data engineering and preprocessing
 
@@ -141,7 +184,7 @@ For inference we used the unseen dataset which was not preprocessed with trainin
 
 `inp = test.iloc[random_number]`
 
-`result = inference(inp.notes, "linear")`
+`result = inference(inp.notes, model)`
 
 `print(f"Prediction: {result[0]}")`
 
