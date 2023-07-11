@@ -16,6 +16,14 @@ Majority of the data is collected using "prompt engineering" which allowed us co
 
 For the same reason we partially collected the M13 series. 
 
+### Prompt Engineering
+
+### Text augmentation
+
+#### Summarization
+
+#### Paraphrasing
+
 ### Data engineering and preprocessing
 
 For effective and robust machine learning model we made sure that the dataset doesn't carry unwanted and redundant information. So we took time to maunally access the data as much as possible to find unwanted phrases. Since we generated the data there was a high probability that the phrases might repeat itself. This is one of the major drawback of the LLM. But we also observed there was less to no duplicacy since some of the repeated or similar phrases were hidden in the paragraph pertaining to the operative notes. 
@@ -49,9 +57,54 @@ It generally creates a topic and inform what words or phrases were predominantly
 
 ![Latent Dirichlet Allocation](resource/LDA.png)
 
+In the end we found these words to be reduntant and to be removed. 
+`word_to_remove = ["1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", 'Certainly!', '00', '00 00', '00 00 00']`
+
+## Embeddings
+To convert the text into embeddings we used Term Frequency-Inverse Document Frequency Vectorization from the Scikit-Learn library. The whole idea of TF-IDF is to measure how important a word is in a document, relative to how important it is in other documents.
+
+Here are some of the important words yeilded by TfIdVectorizer:
+`Feature names or Tokens: ['abscess', 'abscess evacuation', 'absorbable', 'absorbable sutures', 'access', 'access affected', 'accessed', 'achieve', 'achieved', 'achieved using', 'achieved wound', 'achieved wound closed', 'additional', 'address', 'address bone', 'address severe', 'address severe bone', 'addressed', 'adequate', 'adjusted', 'administered', 'advanced', 'advised', 'affected', 'affected area', 'affected joint', 'affected muscle', 'affected role', 'affected vertebral', 'affecting', 'agent', 'aimed', 'alignment', 'alleviate', 'alleviate pain', 'alleviate severe', 'alleviate severe bone', 'allograft', 'allowing', 'anaesthesia', 'analgesics', 'analysis', 'anesthesia', 'anesthesia administered', 'anesthesia appropriate', 'anesthesia appropriate dosage', 'anesthesia care', 'anesthesia dosage', 'anesthesia intraoperative', 'anesthesia intravenous', 'anesthesia patient', 'anesthetic', 'ankle', 'ankle joint', 'anterior', 'anterior approach', 'anti', 'anti inflammatory', 'anti inflammatory medications', 'anti tuberculous', 'anti tuberculous therapy', 'antibiotic', 'antibiotic impregnated', 'antibiotic solution', 'antibiotic therapy', 'antibiotics', 'antibiotics initiated', 'antifungal', 'antifungal therapy', 'antimicrobial', 'antimicrobial therapy', 'applied', 'appointments', 'approach', 'approach employed', 'approach used', 'approach utilized', 'appropriate', 'appropriate dosage', 'appropriate postoperative', 'area', 'areas', 'arthritis', 'arthritis associated', 'arthritis polyarthritis', 'arthritis related', 'arthrodesis', 'arthropathy', 'arthroplasty', 'arthroscopic', 'arthroscopic synovectomy', 'arthroscopy', 'arthrotomy', 'arthrotomy performed', 'articular', 'assess', 'assessed', 'assessment', 'assessment revealed', 'assessments', 'associated', 'associated arthritis', 'associated bone', 'associated bone erosion', 'atrophy', 'augmentation', 'bacterial', 'bacterial agent', 'based', 'based severity', 'bilateral', 'biopsy', 'block', 'blood', 'blood flow', 'bodies', 'body', 'body granuloma', 'body granuloma excision', 'bone', 'bone abscess'...`
+
+We also used Principal component analysis to reduce the given matrix and make it much more robust and effective. 
+
+Once reduced we created training and testing datasets. 
+
 ## Model
+For training we used a variety of models. We assumed that the project doesn't require Deep learning model. Although we them initially we turned out that good with the lack of data. So we decided to use various shallow learning models. 
+
+As such we used the following models:
+
+`names = [
+    "Nearest Neighbors",
+    "Random Forest",
+    "Neural Net",
+    "AdaBoost",
+    "Linear SVM",
+    "RBF SVM",
+    "Decision Tree"]`
+
+We used grid search to find the best hyperparameter in a small subset of data. The result was a list of classifier with the following parameters:
+
+`classifiers = [
+    KNeighborsClassifier(algorithm = 'auto', n_neighbors = 7, weights = 'uniform'),
+    RandomForestClassifier(max_depth = None, min_samples_split = 5, n_estimators = 100, random_state=23),
+    MLPClassifier(activation = 'relu', 
+                  alpha = 0.0001, 
+                  hidden_layer_sizes = (50, 100, 50), 
+                  learning_rate = 'constant', 
+                  solver = 'adam', random_state=23),
+    AdaBoostClassifier(learning_rate = 0.1, n_estimators = 50, random_state=23),
+    SVC(kernel="linear", C=0.025, random_state=23),
+    SVC(gamma=2, C=1, random_state=23),
+    DecisionTreeClassifier(max_depth=5, random_state=23),
+]`
 
 
-## Training
+Finally, we evaluated with model will yeild the best decision boundary with respect to the input data. 
+
+![Decision Boundary 1](resource/DB1.png)
+![Decision Boundary 2](resource/DB2.png)
+
 
 ## Conclusion
