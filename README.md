@@ -138,9 +138,13 @@ This is the model performance on the entire dataset.
 For inference we used the unseen dataset which was not preprocessed with training and testing batch. This ensures that there is less to no data leakage. We used the same preprocessing pipeline and then fed the data into the trained model. The results were extremely promising. 
 
 `random_number = np.random.randint(0, len(test))`
+
 `inp = test.iloc[random_number]`
+
 `result = inference(inp.notes, "linear")`
+
 `print(f"Prediction: {result[0]}")`
+
 `print(f"Ground Truth: {inp.codes}")`
 
 > Prediction: M01.8
