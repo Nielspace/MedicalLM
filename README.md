@@ -135,5 +135,23 @@ This is the model performance on the entire dataset.
 
 #### Inference
 
+For inference we used the unseen dataset which was not preprocessed with training and testing batch. This ensures that there is less to no data leakage. We used the same preprocessing pipeline and then fed the data into the trained model. The results were extremely promising. 
+
+`random_number = np.random.randint(0, len(test))
+inp = test.iloc[random_number]
+    
+result = inference(inp.notes, "linear")
+
+print(f"Prediction: {result[0]}")
+print(f"Ground Truth: {inp.codes}")`
+
+> Prediction: M01.8
+> Ground Truth: M01.8
 
 ## Conclusion
+This was a small project that could be possibly scaled up with deep neural networks. The scaling requires a massive amount of data -- generate or real world. But in any case training a model more than 60 labels will require extensive processing and training. As ICD10 codes have more that 1000 codes a deep neural network will be suffice. An important observation that we made was that each label must have atleast 5000 samples if training on neural nets. But if the data is small then shallow machine learning approach is enough. 
+
+## ToDo:
+1. Collect more data for all ICD10 codes. 
+2. Fine tune an existing model such medBert. 
+3. Generate good embeddings for robust multilabel classification. 
