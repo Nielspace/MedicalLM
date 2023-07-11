@@ -63,6 +63,7 @@ As mentioned before because of the financial restictions we had to stop data gen
 | bert-base-uncased          | substitute | Insert word by contextual word embeddings        |
 | t5-base                    | summary    | Summarize the text                               |
 | facebook/bart-large-cnn    | summary    | Summarize the text with a min and max word length|
+| tuner007/pegasus_paraphrase| paraphrase | Paraphrase the text                              |
     
 
 ### Data engineering and preprocessing
