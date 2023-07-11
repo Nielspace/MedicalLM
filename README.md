@@ -101,10 +101,27 @@ We used grid search to find the best hyperparameter in a small subset of data. T
 ]`
 
 
-Finally, we evaluated with model will yeild the best decision boundary with respect to the input data. 
+Finally, we evaluated with model will yeild the best decision boundary with respect to the input data for binary classification. 
 
 ![Decision Boundary 1](resource/DB1.png)
 ![Decision Boundary 2](resource/DB2.png)
 
+We also tried the same with XGBoost. 
+
+![Decision Boundary 3](resource/XGB.png)
+
+
+| S.no |  Model                    | Accuracy | Precision | Recall   | F1-Score |
+|------|---------------------------|----------|-----------|----------|----------|
+| 0	   | Random Forest Classifier  | 0.989562 | 0.989626  | 0.989575 | 0.989561 |
+| 1	   | AdaBoostClassifier	       | 0.899791 | 0.900258  | 0.899756 | 0.899756 |
+| 2	   | Neural Nets	           | 0.885177 | 0.885333  | 0.885199 | 0.885169 |
+| 3	   | KNN	                   | 0.910230 | 0.910234  | 0.910234 | 0.910230 |
+| 4	   | XGB	                   | 0.931106 | 0.931117  | 0.931102 | 0.931105 |
+
+
+#### Training
+
+With the results above we decided to 
 
 ## Conclusion
